@@ -1,0 +1,10 @@
+SRCRPMS := $(wildcard $(SRCDIR)*.rpm)
+RPMS := $(subst $(SRCDIR),./,$(SRCRPMS))
+# $(warning "SRCDIR=$(SRCDIR),OUTDIR=$(OUTDIR),RPMS=$(RPMS)")
+
+./repodata/repomd.xml: $(RPMS)
+	createrepo .
+
+./%.rpm: $(SRCDIR)%.rpm
+	cp $^ $@
+	LANG=C $(BINDIR)/rpmsign-batch.expect $(shell grep 'Passphrase:' ${HOME}/.gnupg/gpg-rpmsign | cut -f 2 -d ' ') $@
