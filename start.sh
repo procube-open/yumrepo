@@ -3,7 +3,7 @@ echo "Setting up yum repository.";
 make
 
 _term() {
-  echo "Caught SIGTERM signal!"
+  echo "Send SIGTERM to Web Server."
   kill -TERM "$child" 2>/dev/null
 }
 
@@ -14,3 +14,7 @@ httpd -D FOREGROUND &
 
 child=$!
 wait "$child"
+echo "Waiting for Web Server Shutdown."
+wait "$child"
+echo "Shutdown Complete."
+exit 0
