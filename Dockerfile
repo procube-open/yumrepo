@@ -1,6 +1,6 @@
 FROM centos:7
 MAINTAINER "Mitsuru Nakakawaji" <mitsuru@procube.jp>
-RUN yum -y install httpd rpmsign createrepo make
+RUN yum -y install httpd rpm-sign expect createrepo make 
 ENV HOME /root
 WORKDIR /root
 COPY generate-gpgkey.sh generate-repo.sh Makefile Makefile.repo rpmsign-batch.expect start.sh /root/
