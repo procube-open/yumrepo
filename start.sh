@@ -1,20 +1,9 @@
 #!/bin/bash
-echo "Setting up yum repository.";
+if [ -z "$FQDN" ]; then
+  echo "ERROR: FQDN Environment Variable must be set"
+  exit 1
+fi
+set -x
+echo "ServerName $FQDN" > /etc/httpd/conf.d/servername.conf
 make
-
-_term() {
-  echo "Send SIGTERM to Web Server."
-  kill -TERM "$child" 2>/dev/null
-}
-
-trap _term SIGTERM
-
-echo "Start Web server.";
-httpd -D FOREGROUND &
-
-child=$!
-wait "$child"
-echo "Waiting for Web Server Shutdown."
-wait "$child"
-echo "Shutdown Complete."
-exit 0
+exec httpd -D FOREGROUND
