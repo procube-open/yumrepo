@@ -15,12 +15,12 @@ BINDIR := $(abspath .)
 .PHONY: all FORCE
 all: $(OUTDIR)/$(REPO_NAME).repo $(OUTDIR)/RPM-GPG-KEY-$(REPO_NAME) $(REPOS)
 
-$(OUTDIR)/$(REPO_NAME).repo:
+$(OUTDIR)/$(REPO_NAME).repo: generate-repo.sh
 	mkdir -p $(OUTDIR)
 	./generate-repo.sh > $(OUTDIR)/$(REPO_NAME).repo
 	@echo "$@ is created"
 
-$(OUTDIR)/RPM-GPG-KEY-$(REPO_NAME):
+$(OUTDIR)/RPM-GPG-KEY-$(REPO_NAME): generate-gpgkey.sh
 	mkdir -p $(OUTDIR)
 	./generate-gpgkey.sh
 	gpg2 --export -a "${REPO_NAME}" > $(OUTDIR)/RPM-GPG-KEY-$(REPO_NAME)
