@@ -15,4 +15,5 @@ ENV SRCDIR $HOME/RPMS
 ENV OUTDIR /var/www/html/${REPO_NAME}
 ENV EMAIL mitsuru@procube.jp
 ENV FQDN yum-repo.chip-in.net
+EXPOSE 80
 CMD ["./start.sh"]
