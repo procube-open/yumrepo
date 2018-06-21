@@ -13,7 +13,7 @@ COPY generate-gpgkey.sh generate-repo.sh Makefile Makefile.repo rpmsign-batch.ex
 ENV REPO_NAME chip-in
 ENV SRCDIR $HOME/RPMS
 ENV OUTDIR /var/www/html/${REPO_NAME}
-ENV EMAIL mitsuru@procube.jp
+ENV EMAIL support@procube.jp
 ENV FQDN yum-repo.chip-in.net
 EXPOSE 80
 CMD ["./start.sh"]

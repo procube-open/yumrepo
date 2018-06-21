@@ -8,12 +8,12 @@ if [ -z "$FQDN" ]; then
   exit 1
 fi
 cat << __EOF
-# [${REPO_NAME}-noarch]
-# name=${REPO_NAME}
-# baseurl=https://${FQDN}/${REPO_NAME}/noarch/
-# gpgcheck=1
-# gpgkey=https://${FQDN}/${REPO_NAME}/RPM-GPG-KEY-${REPO_NAME}
-# enabled=1
+[${REPO_NAME}-noarch]
+name=${REPO_NAME}
+baseurl=https://${FQDN}/${REPO_NAME}/noarch/
+gpgcheck=1
+gpgkey=https://${FQDN}/${REPO_NAME}/RPM-GPG-KEY-${REPO_NAME}
+enabled=1
 
 [${REPO_NAME}-arch]
 name=${REPO_NAME}
