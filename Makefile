@@ -24,7 +24,7 @@ $(OUTDIR)/RPM-GPG-KEY-$(REPO_NAME): generate-gpgkey.sh
 	mkdir -p $(OUTDIR)
 	./generate-gpgkey.sh
 	gpg2 --export -a "${REPO_NAME}" > $(OUTDIR)/RPM-GPG-KEY-$(REPO_NAME)
-	echo "%_signature gpg" >> ~/.rpmmacros
+	echo "%_signature gpg" > ~/.rpmmacros
 	echo "%_gpg_name $(REPO_NAME)" >> ~/.rpmmacros
 	@echo "$@ is created"
 
@@ -34,6 +34,8 @@ $(OUTDIR)/%/repodata: FORCE
 	cd $(dir $@); SRCDIR=$(subst $(OUTDIR),$(SRCDIR),$(dir $@)) BINDIR=$(BINDIR) make -f $(BINDIR)/Makefile.repo
 
 clean:
+	mv $(OUTDIR)/RPM-GPG-KEY-$(REPO_NAME) .
 	rm -rf $(OUTDIR)/*
+	mv RPM-GPG-KEY-$(REPO_NAME) $(OUTDIR)/
 
 FORCE:
